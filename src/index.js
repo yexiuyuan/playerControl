@@ -1,7 +1,9 @@
-import Button from './components/button/button.js';
-const button=new Button('google.com');
-button.render('a');
+import PlayBtn from './components/control/playBtn/playBtn';
+import PauseBtn from './components/control/pauseBtn/pauseBtn'
 
-button.on('playerPlayBtnClik',()=>{
-  console.log('click index.js')
-})
+const leftControl = document.getElementsByClassName('control-left')[0];
+const rightControl = document.getElementsByClassName('control-right')[0];
+const playBtn = new PlayBtn(leftControl);
+playBtn.render();
+const pauseBtn = new PauseBtn(leftControl);
+pauseBtn.render();
