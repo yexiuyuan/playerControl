@@ -20,6 +20,16 @@ module.exports = {
         loaders: ["babel-loader"],
         include: /src/
       },
+      // {
+      //     test: /\.js$/,
+      //     use: {
+      //         loader: 'babel-loader',
+      //         options: {
+      //             presets: [["es2015", {"loose":true}],'stage-0'],
+      //             plugins: ["transform-class-properties","transform-runtime"]
+      //         }
+      //     }
+      // },
       {
         test: /\.styl$/,
         loaders: ['style-loader', 'css-loader', 'stylus-loader'],

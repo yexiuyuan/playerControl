@@ -1,16 +1,33 @@
 import btn from "../btn/btn";
-import template from './pauseBtn.html';
-import Mustache from 'mustache';
-
+import './pauseBtn.styl';
 export default class pauseBtn extends btn {
   constructor(node) {
-    super(node);
+    super();
+    this.node = node;
+    this.name='Pause';
+    this.pause = null;
   }
   render() {
-    this.node.innerHTML += Mustache.render(template, {});
+    console.log('pauseBtn render');
+
+    this.pause = document.createElement('div');
+    this.pause.className = 'M706C61796572-control-pauseBtn btn';
+    this.pause.style.display = 'block';
+
+    this.node.appendChild(this.pause);
+
+    this.pause.addEventListener('click',this.onClickHandle.bind(this));
   }
 
-  getNode(){
-    return document.getElementsByClassName('M706C61796572-control-playBtn')[0];
+  onClickHandle(e){
+    super.disptchStatusEvent(this.name,'bbb')
+  }
+
+  get visible() {
+    return (this.pause.style.display == 'none' ? false : true);
+  }
+
+  set visible(bool) {
+    this.pause.style.display = (bool ? 'block' : 'none');
   }
 }

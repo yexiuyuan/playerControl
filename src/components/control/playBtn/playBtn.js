@@ -1,20 +1,36 @@
-import Mustache from 'mustache';
-import template from './playBtn.html';
 import './playBtn.styl';
 import btn from '../btn/btn';
-export default class playBtn extends btn {
+class playBtn extends btn {
   constructor(node) {
     super();
     this.node = node;
-
+    this.name='Play';
+    this.play=null;
   }
   render() {
-    this.node.innerHTML += Mustache.render(template, {});
-    console.log(this.node);
-    console.log(super.getNode())
-    let a = document.getElementsByClassName('M706C61796572-control-playBtn')[0];
-    a.addEventListener('click', () => {
-      console.log('1111')
-    });
+    console.log('playBtn render')
+
+    this.play=document.createElement('div');
+    this.play.className='M706C61796572-control-playBtn btn';
+    this.node.appendChild(this.play);
+    
+    this.node.appendChild(this.play);
+
+    this.play.addEventListener('click',this.onClickHandle.bind(this));
+  }
+
+  onClickHandle(e){
+    super.disptchStatusEvent(this.name,'aaa')
+  }
+
+  
+  get visible() {
+    return (this.play.style.display == 'none' ? false : true);
+  }
+
+  set visible(bool) {
+    this.play.style.display = (bool ? 'block' : 'none');
   }
 }
+
+export default playBtn;

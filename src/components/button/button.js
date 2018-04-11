@@ -2,7 +2,7 @@ import $ from 'jquery';
 import template from './button.html';
 import Mustache from 'mustache';
 import './button.styl';
-
+import $ from 'jquery';
 import EventEmitter from 'events';
 
 export default class Button extends EventEmitter {

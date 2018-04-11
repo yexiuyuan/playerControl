@@ -1,23 +1,17 @@
-import { EventEmitter } from "events";
-import template from './btn.html';
-import Mustache from 'mustache';
+import {
+  EventEmitter
+} from "events";
 import './btn.styl';
-export default class btn extends EventEmitter{
-  constructor(node){
+export default class btn extends EventEmitter {
+  constructor() {
     super();
-    this.node=node;
-
   }
 
-  render(){
-    console.log('aaaaaaa',this.node);
-    console.log(Mustache.render(template,{}))
-    let a=document.write(Mustache.render(template,{}));
-    console.log()
+  render() {
   }
-
-  getNode(){
-    return document.getElementsByClassName('M706C61796572-control-playBtn')[0];
+ 
+  disptchStatusEvent(module,info){
+    this.emit('xycControlView',{module:module,info:info});
   }
 
 }
