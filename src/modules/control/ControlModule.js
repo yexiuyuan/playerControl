@@ -1,3 +1,7 @@
+import {
+  EventEmitter
+} from "events";
+
 import PlayBtn from './playBtn/playBtn';
 import reloadBtn from './reloadBtn/reloadBtn'
 import danmuSwitch from './danmuSwitch/danmuSwitch'
@@ -12,8 +16,8 @@ import Title from './title/title'
 
 import Log from './Log';
 
-import './control_css.css'
-class control {
+import './control_css.css';
+class control{
   static ins = null;
   static stage = null;
   constructor() {
@@ -22,6 +26,7 @@ class control {
     this.tips = null; //播控上面的tip提示
     this.preView = null; //背景
     this.title = null; //标题
+    this._emit=new EventEmitter();
 
     this.main = document.createElement('div');
     this.main.className = 'M706C61796572-control';
@@ -202,7 +207,7 @@ class control {
       default:
         break;
     }
-    this.disptchStatusEvent(arg.module, arg.info)
+    this.disptchStatusEvent(arg.module,arg.info);
   }
 
   static get getInstance() {
@@ -215,7 +220,7 @@ class control {
 
 
   set resolutionList(data) {
-    this.getInstanceByName('Resolution').resolutionList = data;
+    this.getInstanceByName('Resolution').resolutionList(data);
   }
 
   set controlVisible(bool) {
@@ -227,7 +232,7 @@ class control {
   }
 
   disptchStatusEvent(module, info) {
-    this.emit('xycControlView', {
+    this._emit.emit('xycControlView', {
       module: module,
       info: info
     });
@@ -239,8 +244,8 @@ class control {
       return;
     }
     let instance = this.getInstanceByName(name);
-    if (instance.hasOwnProperty(attr)) {
-
+    if (instance.hasOwnAttribute(attr)) {
+      instance[attr](value);
     } else {
       Log.L(this.name, instance.name + '组件没有' + attr + '属性')
     }
@@ -250,7 +255,7 @@ class control {
    * @param 返回一个对象 Object*/
   getAttribute(name, attr) {
     var instance = this.getInstanceByName(name);
-    if (instance.hasOwnProperty(attr)) {
+    if (instance.hasOwnAttribute(attr)) {
       return instance[attr];
     } else {
       return null;

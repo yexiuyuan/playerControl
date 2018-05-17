@@ -2,7 +2,7 @@ class Log{
   constructor(){
 
   }
-  L(name,str){
+  L(name,...str){
     console.log('['+name+']','::::',str);
   }
 }

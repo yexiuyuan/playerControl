@@ -4,8 +4,6 @@
 import Polyfill from "./polyfill/Polyfill";
 import EventEmitter from "events";
 import Control from "./modules/control/ControlModule"
-import Tween from './modules/control/drag/tween'
-
 class PGCPlayer extends EventEmitter {
 
   constructor() {
@@ -20,14 +18,16 @@ class PGCPlayer extends EventEmitter {
     Control.getInstance.renderCtrol(['Play', 'Reload'], 'left')
     Control.getInstance.renderCtrol(['FullScreen','PageFull' ,'Voice', 'Resolution', 'DanmuSwitch'], 'right');
 
-    Control.getInstance.resolutionList = {
-      'currentResolution': '高清',
-      'select': ['蓝光', '高清', '标清']
-    };
     Control.getInstance.renderAct();
     Control.getInstance.rendPreView("loading");
     Control.getInstance.renderTips();
     Control.getInstance.renderTitle();
+
+    Control.getInstance.setAttribute('Play','visible',true);
+    Control.getInstance.setAttribute('Resolution','resolutionList',{
+      'currentResolution': '高清',
+      'select': ['蓝光', '高清', '标清']
+    });
   }
 
   /**
