@@ -11,7 +11,7 @@ export default class pauseBtn extends btn {
     console.log('pauseBtn render');
 
     this.pause = document.createElement('div');
-    this.pause.className = 'M706C61796572-control-pauseBtn btn';
+    this.pause.className = 'M706C61796572-control-pauseBtn M706C61796572-btn';
     this.pause.style.display = 'block';
 
     this.node.appendChild(this.pause);

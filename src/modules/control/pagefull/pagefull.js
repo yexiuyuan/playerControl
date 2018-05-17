@@ -27,9 +27,9 @@ class pageFull extends btn {
   }
   set status(status) {
     if (status == 'normal') {
-      this.pageFull.className = 'M706C61796572-control-pageFull btn';
+      this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
     } else if (status == 'pageFull') {
-      this.pageFull.className = 'M706C61796572-control-exitPageFull btn';
+      this.pageFull.className = 'M706C61796572-control-exitPageFull M706C61796572-btn';
     }
   }
 

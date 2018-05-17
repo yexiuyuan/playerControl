@@ -18,7 +18,7 @@ class resolution extends btn {
     this.currentResolutionP = document.createElement('p');
     this.currentResolutionSpan = document.createElement('span');
     // this.resolution.display = "block";
-    this.resolution.className = 'M706C61796572-control-resolution btn';
+    this.resolution.className = 'M706C61796572-control-resolution M706C61796572-btn';
     this.node.appendChild(this.resolution);
     this.resolution.appendChild(this.currentResolutionP);
     this.resolution.appendChild(this.resolutionUl);
@@ -50,13 +50,18 @@ class resolution extends btn {
     this.onClickHandle(res)
   }
 
-  resolutionList(data) {
+  set sharpnessList(data) {
     var contentHTML = '';
+    this.data = data;
     this.currentResolutionSpan.innerText = data.currentResolution;
     for (let i = 0; i < data.select.length; i++) {
       contentHTML += `<li data-index="${i}">${data.select[i]}</li>`;
     }
     this.resolutionUl.innerHTML = contentHTML;
+  }
+
+  get sharpnessList() {
+    return this.data;
   }
 
   hasOwnAttribute(str) {

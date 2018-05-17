@@ -16,7 +16,7 @@ class fullScreen extends btn {
   render() {
     console.log('fullScreen render')
     this.fullScreen = document.createElement('div');
-    this.fullScreen.className = 'M706C61796572-control-fullScreen btn';
+    this.fullScreen.className = 'M706C61796572-control-fullScreen M706C61796572-btn';
     this.node.appendChild(this.fullScreen);
     this.fullScreen.addEventListener('click', this.onClickHandle.bind(this));
 
@@ -29,13 +29,13 @@ class fullScreen extends btn {
         if (this.isFullScreen) {
           console.log('进入全屏');
           this.action = 'fullScreen';
-          this.fullScreen.className = 'M706C61796572-control-resizeScreen btn';
+          this.fullScreen.className = 'M706C61796572-control-resizeScreen M706C61796572-btn';
           this.videoNode.style.width = "100%";
           this.videoNode.style.height = "100%";
         } else {
           console.log('退出全屏');
           this.action = 'exitFullScreen';
-          this.fullScreen.className = 'M706C61796572-control-fullScreen btn';
+          this.fullScreen.className = 'M706C61796572-control-fullScreen M706C61796572-btn';
           this.videoNode.style.width = this.oldSize["width"] + "px";
           this.videoNode.style.height = this.oldSize["height"] + "px";
         }

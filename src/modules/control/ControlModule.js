@@ -217,12 +217,6 @@ class control{
     return control.ins;
   }
 
-
-
-  set resolutionList(data) {
-    this.getInstanceByName('Resolution').resolutionList(data);
-  }
-
   set controlVisible(bool) {
     this.main.style.display = bool ? 'block' : 'none';
   }
@@ -241,7 +235,11 @@ class control{
   on(event, listener) {
     this._emitter.addListener(event, listener);
   }
-  /** */
+  /**
+   * @name 组件名
+   * @attr 属性名
+   * @value 属性值
+   */
   setAttribute(name, attr, value) {
     if (this.isHasInstanceByName(name) == false) {
       Log.L(this.name, '不存在该组件');
@@ -249,14 +247,15 @@ class control{
     }
     let instance = this.getInstanceByName(name);
     if (instance.hasOwnAttribute(attr)) {
-      instance[attr](value);
+      instance[attr]=(value);
     } else {
       Log.L(this.name, instance.name + '组件没有' + attr + '属性')
     }
   }
   /**
-   * @param 获取属性
-   * @param 返回一个对象 Object*/
+   * @name 组件名字
+   * @attr 属性名字
+   * */
   getAttribute(name, attr) {
     var instance = this.getInstanceByName(name);
     if (instance.hasOwnAttribute(attr)) {

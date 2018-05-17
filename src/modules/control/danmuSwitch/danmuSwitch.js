@@ -11,7 +11,7 @@ class danmuSwitch extends btn {
   render() {
     console.log('danmuSwitch render')
     this.danmuSwitch=document.createElement('div');
-    this.danmuSwitch.className='M706C61796572-control-danmuSwitch btn M706C61796572-control-danmuOn';
+    this.danmuSwitch.className='M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOn';
     this.node.appendChild(this.danmuSwitch);
     this.danmuSwitch.addEventListener('click',this.onClickHandle.bind(this));
   }

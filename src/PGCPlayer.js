@@ -24,10 +24,11 @@ class PGCPlayer extends EventEmitter {
     Control.getInstance.renderTitle();
 
     Control.getInstance.setAttribute('Play', 'visible', true);
-    Control.getInstance.setAttribute('Resolution', 'resolutionList', {
+    Control.getInstance.setAttribute('Resolution', 'sharpnessList', {
       'currentResolution': '高清',
       'select': ['蓝光', '高清', '标清']
     });
+    console.log(Control.getInstance.getAttribute('Play','visible'));
     Control.getInstance.on('xycControlView', (arg) => {
       switch (arg.module) {
         case 'Play':

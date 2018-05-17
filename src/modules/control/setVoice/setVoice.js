@@ -20,7 +20,7 @@ class setVoice extends btn {
   render() {
     console.log('resolution render')
     this.setVoice = document.createElement('div'); //创建设置音量容器
-    this.setVoice.className = "M706C61796572-control-setVoice btn";
+    this.setVoice.className = "M706C61796572-control-setVoice M706C61796572-btn";
     //下面是拖拽条的NTML内容
     var html = `<div id="leftIcon"></div>
 						<div class="rightBar">

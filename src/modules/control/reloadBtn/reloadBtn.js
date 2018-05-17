@@ -9,9 +9,8 @@ class reloadBtn extends btn{
     this.action = "reload"
   }
   render(){
-    console.log('reloadBtn render');
     this.reload = document.createElement('div');
-    this.reload.className = "M706C61796572-control-reloadBtn btn";
+    this.reload.className = "M706C61796572-control-reloadBtn M706C61796572-btn";
     this.node.appendChild(this.reload);
     this.reload.addEventListener('click',this.onClickHandle.bind(this));
   }

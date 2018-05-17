@@ -11,7 +11,7 @@ class playBtn extends btn {
     console.log('playBtn render')
 
     this.play=document.createElement('div');
-    this.play.className='M706C61796572-control-playBtn btn';
+    this.play.className='M706C61796572-control-playBtn M706C61796572-btn';
     this.node.appendChild(this.play);
     
     this.node.appendChild(this.play);
