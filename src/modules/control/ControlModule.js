@@ -17,16 +17,13 @@ import Title from './title/title'
 import Log from './Log';
 
 import './control_css.css';
-class control{
+class control {
   static ins = null;
   static stage = null;
   constructor() {
     this.name = 'ControlModule';
     this.actView = null; //小剧场
-    this.tips = null; //播控上面的tip提示
-    this.preView = null; //背景
-    this.title = null; //标题
-    this._emitter=new EventEmitter();
+    this._emitter = new EventEmitter();
 
     this.main = document.createElement('div');
     this.main.className = 'M706C61796572-control';
@@ -43,12 +40,7 @@ class control{
     this.itemsDic = new Array(); //所有组件库
     this.eleDic = new Array(); //当前添加进来的组件库
     this.itemsDicFunc();
-    this.resolution_list = null;
-    this.videoNode = null;
 
-    control.stage.addEventListener('resize', () => {
-      console.log('123456789')
-    });
     control.stage.addEventListener('mouseleave', this.eventHandler.bind(this));
     control.stage.addEventListener('mouseenter', this.eventHandler.bind(this));
   }
@@ -102,6 +94,11 @@ class control{
     }
   }
 
+  /**
+   * 将组件加入储存数组
+   * @name  名字 
+   * @instance  组件 
+   */
   setItemToDic(name, instance) {
     if (instance == null) {
       console.log('不存在该组件');
@@ -130,44 +127,50 @@ class control{
     });
   }
 
+  /**
+   * loading end error
+   * @data  
+   */
   rendPreView(data) {
-    if (!this.preView) {
-      this.preView = new PreView(control.stage);
-      this.preView.render();
+    if (!this.isHasInstanceByName('PreView')) {
+      let preView = new PreView(control.stage);
+      if (this.setItemToDic('PreView', preView)){
+        preView.render();
+      }
     }
-
-    this.preView.setTypeContent = data;
+    this.getInstanceByName('PreView').State = data;
   }
-
+  /**
+   * 提示
+   * @data 
+   */
   renderTips(data) {
-    if (!this.tips) {
-      this.tips = new Tips(control.stage);
-      this.tips.render();
+    if (!this.isHasInstanceByName('Tips')) {
+      let tips = new Tips(control.stage);
+      if(this.setItemToDic('Tips',tips)){
+        tips.render();
+      }
     }
-
-    this.tips.content = '你好啊!爱奇艺小剧场';
+    this.getInstanceByName('Tips').Content='你好啊!爱奇艺小剧场';
   }
 
+  /**
+   * 直播标题
+   * @data
+   */
   renderTitle(data) {
-    if (!this.title) {
-      this.title = new Title(control.stage)
-      this.title.render();
+    if (!this.isHasInstanceByName('Title')) {
+      let title = new Title(control.stage)
+      if(this.setItemToDic('Title',title)){
+        title.render();
+      }
     }
-    this.title.content = '大家好！这里是爱奇艺小剧场。';
+    this.getInstanceByName('Title').Content = '大家好！这里是爱奇艺小剧`1111场。';
   }
 
   statusEvent(arg) {
     console.log(arg.module, ':::::::', arg.info)
     switch (arg.module) {
-
-      case "Play":
-        if (arg.info == 'Pause') {
-          console.log('开始播放')
-        } else if (arg.info == 'Play') {
-          console.log('暂停播放')
-        }
-        break;
-
       case "reload":
         console.log('刷新')
         break;
@@ -189,10 +192,10 @@ class control{
 
       case "FullScreen":
         if (arg.info == 'fullScreen') {
-          this.title && (this.title.visible = true);
+        
           (this.actView) && (this.actView.visible = false);
         } else if (arg.info == 'exitFullScreen') {
-          this.title && (this.title.visible = false);
+           
           (this.actView) && (this.actView.visible = true);
         }
         break;
@@ -206,7 +209,7 @@ class control{
       default:
         break;
     }
-    this.disptchStatusEvent(arg.module,arg.info);
+    this._disptchStatusEvent(arg.module, arg.info);
   }
 
   static get getInstance() {
@@ -224,7 +227,7 @@ class control{
     return this.getInstanceByName('FullScreen').isFullScreen;
   }
 
-  disptchStatusEvent(module, info) {
+  _disptchStatusEvent(module, info) {
     this._emitter.emit('xycControlView', {
       module: module,
       info: info
@@ -235,6 +238,7 @@ class control{
     this._emitter.addListener(event, listener);
   }
   /**
+   * 设置属性参数
    * @name 组件名
    * @attr 属性名
    * @value 属性值
@@ -246,12 +250,13 @@ class control{
     }
     let instance = this.getInstanceByName(name);
     if (instance.hasOwnAttribute(attr)) {
-      instance[attr]=(value);
+      instance[attr] = (value);
     } else {
       Log.L(this.name, instance.name + '组件没有' + attr + '属性')
     }
   }
   /**
+   * 获取属性参数
    * @name 组件名字
    * @attr 属性名字
    * */
@@ -262,6 +267,24 @@ class control{
     } else {
       return null;
     }
+  }
+
+  /**
+   * 添加组件
+   * @name 组件名字
+   * @index 插到第几个组件
+   * @type left right
+   */
+  addElement(name,index,type) {
+
+  }
+
+  /**
+   * 移除组件
+   * @name 组件名字
+   */
+  removeElement(name) {
+
   }
 
   /**是否有组件对象 */

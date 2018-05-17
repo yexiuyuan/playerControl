@@ -91,11 +91,12 @@ class fullScreen extends btn {
       (document.fullscreenElement ? true : false);
   }
 
-  set isFullScreen(bool){
-    console.log('aaaa')
+  set isFullScreen(bool) {
     this.onClickHandle(null);
   }
-
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
+  }
 }
 
 export default fullScreen;

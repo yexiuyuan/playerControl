@@ -27,7 +27,13 @@ class title {
     }, 1000);
 
   }
-  set content(str) {
+
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
+  }
+
+  set Content(str) {
+    console.log('aaaaaaaaa');
     this._title.innerText = str;
   }
 

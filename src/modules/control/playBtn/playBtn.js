@@ -50,7 +50,7 @@ class playBtn extends btn {
     }
 
     get playState() {
-        return this.action == 'Play' ? true : false;
+        return this.action == 'Play' ? false : true;
     }
 }
 

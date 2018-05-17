@@ -5,6 +5,7 @@
   height: 33px;
   border-radius: 33px;
   user-select: none;
+  z-index: 1;
 }
 
 .act-data span {

@@ -29,19 +29,29 @@ class PGCPlayer extends EventEmitter {
       'currentResolution': '高清',
       'select': ['蓝光', '高清', '标清']
     });
-    Control.getInstance.setAttribute('Bullet','bulletVisible',false);
-    console.log(Control.getInstance.getAttribute('Play','visible'));
-    console.log(Control.getInstance.getAttribute('Play','playState'));
+    Control.getInstance.setAttribute('Bullet', 'bulletVisible', false);
+    Control.getInstance.setAttribute('PreView', 'visible', false);
+    Control.getInstance.setAttribute("PreView", 'State', 'end');
+    Control.getInstance.setAttribute("Tips", 'Content', 'lei啊lei啊，快活啊！');
+    Control.getInstance.setAttribute("Title", 'Content', 'lei啊lei啊，快活啊！');
+    console.log(Control.getInstance.getAttribute('Play', 'visible'));
+    console.log(Control.getInstance.getAttribute('Play', 'playState'));
     Control.getInstance.on('xycControlView', (arg) => {
       switch (arg.module) {
         case 'Play':
-          if (arg.info == 'Pause') {
-            
-          } else if (arg.info == 'Play') {
-            
+          if (Control.getInstance.getAttribute('Play','playState')) {
+            console.log('播放状态')
+          } else {
+            console.log('暂停状态')
           }
           break;
-
+        case 'FullScreen':
+          if(Control.getInstance.getAttribute('FullScreen','isFullScreen')){
+            Control.getInstance.setAttribute('Title','visible',true);
+          }else{
+            Control.getInstance.setAttribute('Title','visible',true);
+          }
+          break;
         default:
           break;
       }

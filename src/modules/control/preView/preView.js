@@ -12,11 +12,15 @@ class preView {
     this.node.appendChild(this.preView);
   }
 
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
+  }
 
-  set setTypeContent(data) {
+  set State(value) {
+    this.preView.style.display = 'block';
     // data是SDK传进来的类型分为三种loading，leave，end
-    var contentHTML = "";
-    switch (data) {
+    let contentHTML = "";
+    switch (value) {
       case "loading":
         contentHTML += `
           <div class="preViewContent">
@@ -40,13 +44,21 @@ class preView {
         contentHTML += `
           <div class="preViewContent">
             <p>直播结束了，有回看哦~</p>
-            <a href="javascript:;"></a>
+            <a href=""></a>
           </div>
         `;
         this.preView.innerHTML = contentHTML;
         break;
       default:
     }
+  }
+
+  set visible(bool) {
+    this.preView.style.display = bool ? 'block' : 'none';
+  }
+
+  get visible() {
+    return this.preView.style == 'none' ? false : true;
   }
 }
 export default preView

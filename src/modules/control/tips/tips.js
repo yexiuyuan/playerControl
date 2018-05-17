@@ -12,7 +12,11 @@ class tips {
     this.visible=false;
   }
 
-  set content(str) {
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
+  }
+
+  set Content(str) {
     this._view.innerHTML = str;
     this.visible=true;
     setTimeout(() => {
