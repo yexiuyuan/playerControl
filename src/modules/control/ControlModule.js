@@ -26,7 +26,7 @@ class control{
     this.tips = null; //播控上面的tip提示
     this.preView = null; //背景
     this.title = null; //标题
-    this._emit=new EventEmitter();
+    this._emitter=new EventEmitter();
 
     this.main = document.createElement('div');
     this.main.className = 'M706C61796572-control';
@@ -232,10 +232,14 @@ class control{
   }
 
   disptchStatusEvent(module, info) {
-    this._emit.emit('xycControlView', {
+    this._emitter.emit('xycControlView', {
       module: module,
       info: info
     });
+  }
+
+  on(event, listener) {
+    this._emitter.addListener(event, listener);
   }
   /** */
   setAttribute(name, attr, value) {
