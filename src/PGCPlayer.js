@@ -16,7 +16,7 @@ class PGCPlayer extends EventEmitter {
   render() {
     Control.stage = document.getElementsByClassName("video-container")[0];
     Control.getInstance.renderCtrol(['Play', 'Reload'], 'left')
-    Control.getInstance.renderCtrol(['FullScreen', 'PageFull', 'Voice', 'Resolution', 'DanmuSwitch'], 'right');
+    Control.getInstance.renderCtrol(['FullScreen', 'PageFull', 'Voice', 'Sharpness', 'Bullet'], 'right');
 
     Control.getInstance.renderAct();
     Control.getInstance.rendPreView("loading");
@@ -24,11 +24,14 @@ class PGCPlayer extends EventEmitter {
     Control.getInstance.renderTitle();
 
     Control.getInstance.setAttribute('Play', 'visible', true);
-    Control.getInstance.setAttribute('Resolution', 'sharpnessList', {
+    Control.getInstance.setAttribute('Play', 'playState', false);
+    Control.getInstance.setAttribute('Sharpness', 'sharpnessList', {
       'currentResolution': '高清',
       'select': ['蓝光', '高清', '标清']
     });
+    Control.getInstance.setAttribute('Bullet','bulletVisible',false);
     console.log(Control.getInstance.getAttribute('Play','visible'));
+    console.log(Control.getInstance.getAttribute('Play','playState'));
     Control.getInstance.on('xycControlView', (arg) => {
       switch (arg.module) {
         case 'Play':

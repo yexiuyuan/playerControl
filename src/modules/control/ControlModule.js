@@ -70,8 +70,8 @@ class control{
   itemsDicFunc() {
     this.itemsDic["Play"] = PlayBtn;
     this.itemsDic["Reload"] = reloadBtn;
-    this.itemsDic["DanmuSwitch"] = danmuSwitch;
-    this.itemsDic["Resolution"] = resolution;
+    this.itemsDic["Bullet"] = danmuSwitch;
+    this.itemsDic["Sharpness"] = resolution;
     this.itemsDic["Voice"] = setVoice;
     this.itemsDic["FullScreen"] = fullScreen;
     this.itemsDic["PageFull"] = pagefull;
@@ -197,7 +197,6 @@ class control{
         }
         break;
       case "PageFull":
-        // console.log(this.getInstanceByName('FullScreen').isFullScreen=true)
         if (arg.info == 'normal') {
 
         } else if (arg.info == 'pageFull') {

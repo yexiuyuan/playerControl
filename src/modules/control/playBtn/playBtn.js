@@ -43,7 +43,14 @@ class playBtn extends btn {
         if (bool) {
             this.action = 'Play';
             this.play.className = 'M706C61796572-control-playBtn M706C61796572-btn';
+        } else {
+            this.action = 'Pause';
+            this.play.className = 'M706C61796572-control-pauseBtn M706C61796572-btn';
         }
+    }
+
+    get playState() {
+        return this.action == 'Play' ? true : false;
     }
 }
 
