@@ -1,0 +1,19 @@
+.M706C61796572-control-playBtn {
+  float: left;
+  background: url('../img/play.png') center center no-repeat;
+}
+
+.M706C61796572-control-playBtn:hover {
+  float: left;
+  background: url('../img/play_hover.png') center center no-repeat;
+}
+
+.M706C61796572-control-pauseBtn {
+  float: left;
+  background: url('../img/pause.png') center center no-repeat;
+}
+
+.M706C61796572-control-pauseBtn:hover {
+  float: left;
+  background: url('../img/pause_hover.png') center center no-repeat
+}

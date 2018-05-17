@@ -1,0 +1,21 @@
+.M706C61796572-control-title{
+  position: absolute;
+  top: 0px;
+  height: 40px;
+  background: #222;
+  width: 100%;
+  color: #fff;
+  user-select: none;
+}
+
+.M706C61796572-control-title-content{
+  line-height: 40px;
+  float: left;
+  margin-left: 20px;
+}
+
+.M706C61796572-control-title-time{
+  line-height: 40px;
+  float: right;
+  margin-right: 20px;
+}

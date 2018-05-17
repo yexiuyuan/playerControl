@@ -1,0 +1,21 @@
+.M706C61796572-control {
+  display: block;
+  height: 33px;
+  width: 100%;
+  background: #222;
+  bottom: 0px;
+  position: absolute;
+  z-index: 99;
+}
+.M706C61796572-control-left {
+  float: left;
+  height: 33px;
+  position: relative;
+  z-index: 99
+}
+.M706C61796572-control-right {
+  float: right;
+  height: 33px;
+  position: relative;
+  z-index: 99
+}

@@ -1,0 +1,19 @@
+.M706C61796572-control-pageFull {
+  float: right;
+  margin: 0 5px;
+  background: url('../img/pagefull_normalbig.png') center center no-repeat;
+}
+
+.M706C61796572-control-pageFull:hover {
+  background: url('../img/pagefull_pressbig_hover.png') center center no-repeat;
+}
+
+.M706C61796572-control-exitPageFull {
+  float: right;
+  margin: 0 5px;
+  background: url('../img/pagefull_normal.png') center center no-repeat;
+}
+
+.M706C61796572-control-exitPageFull:hover {
+  background: url('../img/pagefull_press_hover.png') center center no-repeat;
+}

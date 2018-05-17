@@ -1,0 +1,6 @@
+.M706C61796572-control-reloadBtn{
+	background: url('../img/reload.png') center center no-repeat;
+}
+.M706C61796572-control-reloadBtn:hover{
+	background: url('../img/reload_hover.png') center center no-repeat;
+}

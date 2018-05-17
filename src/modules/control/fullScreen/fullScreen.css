@@ -1,0 +1,19 @@
+.M706C61796572-control-fullScreen {
+  margin: 0 5px;
+  float: right;
+  background: url('../img/full_screen.png') center center no-repeat;
+}
+
+.M706C61796572-control-fullScreen:hover {
+  background: url('../img/full_screen_hover.png') center center no-repeat;
+}
+
+.M706C61796572-control-resizeScreen {
+  margin: 0 5px;
+  float: right;
+  background: url('../img/resize_screen.png') center center no-repeat;
+}
+
+.M706C61796572-control-resizeScreen:hover {
+  background: url('../img/resize_screen_hover.png') center center no-repeat;
+}

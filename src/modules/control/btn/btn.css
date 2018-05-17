@@ -1,0 +1,10 @@
+.btn{
+
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  display:inline-block;
+  width:33px;
+  height:33px;
+
+}

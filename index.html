@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+  <meta charset="UTF-8">
+</head>
 <style>
-  body{
+  *{
     margin: 0;
     padding: 0;
   }
-  .control{
-    width: 1280px;
-    height: 40px;
-    background: #000;
-    /* overflow: hidden; */
+  ul{
+    list-style: none;
   }
   .control-left{
-    background: red;
     float: left;
-    height: 40px;
+    height: 20px;
   }
   .control-right{
-    background: blue;
     float: right;
-    height: 40px;
+    height: 20px;
+  }
+  .video-container{
+    width: 800px;
+    height: 450px;
+    background-color: aquamarine;
+    position: relative;
+    overflow: hidden;
+    z-index: 99
   }
 </style>
+
 <body>
-  <div class="control">
-    <div class="control-left"></div>
-    <div class="control-right"></div>
+  <div class="video-container">
   </div>
-  <script src="builds/bundle.js"></script>
- 
+
+  <script src="dist/pgcplayer.js"></script>
+  <script>
+  
+  </script>
 </body>
 
 </html>

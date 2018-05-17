@@ -1,0 +1,23 @@
+.M706C61796572-control-danmuSwitch {
+  float: right;
+  width: 49px;
+  height: 33px;
+  margin: 0 5px;
+}
+
+.M706C61796572-control-danmuSwitch:before {
+  content: "弹幕";
+  line-height: 31px;
+  float: left;
+  margin-left: -37px;
+  color: #c7c7c7;
+  font-size: 16px;
+}
+
+.M706C61796572-control-danmuOn {
+  background: url("../img/danmu_on.png") left center no-repeat;
+}
+
+.M706C61796572-control-danmuOff {
+  background: url("../img/danmu_off.png") left center no-repeat;
+}

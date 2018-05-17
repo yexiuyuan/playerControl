@@ -1,0 +1,103 @@
+.M706C61796572-control-setVoice {
+  float: right;
+  margin:0 5px;
+  width: 86px;
+  height: 33px;
+}
+
+/*音量开始*/
+
+.M706C61796572-control-setVoice>#leftIcon {
+  float: left;
+  width: 25px;
+  height: 16px;
+  background: url('../img/voice_icon.png') center -16px;
+  margin-top: 7px;
+}
+
+#leftIcon.mute {
+  background: url('../img/voice_icon.png') center -48px;
+}
+
+#leftIcon.smallVoice {
+  background: url('../img/voice_icon.png') center -32px;
+}
+
+#leftIcon.middleVoice {
+  background: url('../img/voice_icon.png') center -16px;
+}
+
+#leftIcon.bigVoice {
+  background: url('../img/voice_icon.png') center 0px;
+}
+
+.M706C61796572-control-setVoice>#leftIcon:hover {
+  background: url('../img/voice_icon_hover.png') center -16px;
+}
+
+#leftIcon.mute:hover {
+  background: url('../img/voice_icon_hover.png') center -48px;
+}
+
+#leftIcon.smallVoice:hover {
+  background: url('../img/voice_icon_hover.png') center -32px;
+}
+
+#leftIcon.middleVoice:hover {
+  background: url('../img/voice_icon_hover.png') center -16px;
+}
+
+#leftIcon.bigVoice:hover {
+  background: url('../img/voice_icon_hover.png') center 0px;
+}
+
+/*音量结束*/
+
+.M706C61796572-control-setVoice>.rightBar {
+  position: relative;
+  float: right;
+  width: 55px;
+  height: 4px;
+  background: #878787;
+  border-radius: 2px;
+  margin-top: 13px;
+}
+
+.M706C61796572-control-setVoice>.rightBar>.rightHighLight {
+  height: 4px;
+  background: #5ace30;
+  border-radius: 2px;
+}
+
+.M706C61796572-control-setVoice>.rightBar>.handBar {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #d2d2d2;
+  box-shadow: 0 0 1px #323232;
+  left: 10px;
+  top: -4px;
+}
+
+.voiceTip {
+  transition: 1s all ease;
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  width: 32px;
+  height: 24px;
+  border-radius: 4px;
+  background: #000;
+  border: 1px solid #333;
+  text-align: center;
+  font: 10px/24px "weiruanyahei";
+  color: #fff;
+  visibility: hidden;
+  opacity: 0
+}
+
+.handBar:hover .voiceTip {
+  visibility: visible;
+  opacity: 1;
+}
