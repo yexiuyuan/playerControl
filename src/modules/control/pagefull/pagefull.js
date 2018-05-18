@@ -8,35 +8,67 @@ class pageFull extends btn {
     this.pageFull = null;
     this.action = 'normal';
   }
+
   render() {
-    console.log(this.name, 'render');
     this.pageFull = document.createElement('div');
-    this.status = 'normal';
+    this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
+    this.action = 'normal'
     this.node.appendChild(this.pageFull);
     this.pageFull.addEventListener('click', this.pageFullHandler.bind(this));
   }
+
   pageFullHandler(e) {
-    if (this.action == 'normal') {
-      this.status = 'pageFull';
-      this.action = 'pageFull';
-    } else if (this.action == 'pageFull') {
+    if (this.status == 'pageFull') {
       this.status = 'normal';
-      this.action = 'normal';
+    } else if (this.status == 'normal') {
+      this.status = 'pageFull';
     }
-    super.disptchStatusEvent(this.name,this.action)
+    super.disptchStatusEvent(this.name, this.action)
   }
   set status(status) {
-    if (status == 'normal') {
-      this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
-    } else if (status == 'pageFull') {
-      this.pageFull.className = 'M706C61796572-control-exitPageFull M706C61796572-btn';
+    if (status == 'pageFull') {
+      this._pageFull();
+    } else if (status == 'normal') {
+      this._exitPageFull();
+    }
+    
+  }
+
+  set isPageFull(bool) {
+    console.log('aaaaaaa',bool)
+    if(bool){
+      this._pageFull();
+      
+    }else{
+      this._exitPageFull();
     }
   }
 
-  get status(){
+  get isPageFull() {
+    return this.action == 'normal' ? false : true;
+  }
+
+  get status() {
     return this.action;
   }
 
+  set _tip(str) {
+    this.pageFull.title = str;
+  }
+
+  _pageFull() {
+    this.pageFull.className = 'M706C61796572-control-exitPageFull M706C61796572-btn';
+    this._tip = '退出网页全屏'
+    this.action = 'pageFull';
+  }
+  _exitPageFull() {
+    this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
+    this._tip = '网页全屏'
+    this.action = 'normal';
+  }
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
+  }
 }
 
 export default pageFull;

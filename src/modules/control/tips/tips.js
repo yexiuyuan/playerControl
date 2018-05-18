@@ -16,7 +16,7 @@ class tips {
     return ((this.__proto__).hasOwnProperty(str));
   }
 
-  set Content(str) {
+  set content(str) {
     this._view.innerHTML = str;
     this.visible=true;
     setTimeout(() => {

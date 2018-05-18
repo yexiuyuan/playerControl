@@ -6,25 +6,26 @@ class danmuSwitch extends btn {
     this.node = node;
     this.name = 'danmuSwitch';
     this.danmuSwitch = null;
-    this.action = 'on';
+    this._action = null;
+    this._bulletVisible=null;
   }
+  
   render() {
-    console.log('danmuSwitch render')
     this.danmuSwitch = document.createElement('div');
     this.danmuSwitch.className = 'M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOn';
+    this._bulletVisible=true;
     this.node.appendChild(this.danmuSwitch);
     this.danmuSwitch.addEventListener('click', this.onClickHandle.bind(this));
   }
 
   onClickHandle(e) {
-    if (this.action == 'on') {
-      this.action = 'off';
-      this.danmuSwitch.className = "M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOff";
+    if (this._bulletVisible) {
+      this._offBullet();
     } else {
-      this.action = 'on';
-      this.danmuSwitch.className = "M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOn";
+      this._onBullet();
     }
-    super.disptchStatusEvent(this.name, this.action)
+    this._action='bulletVisible';
+    super.disptchStatusEvent(this.name, this._action)
   }
 
   hasOwnAttribute(str) {
@@ -40,15 +41,15 @@ class danmuSwitch extends btn {
   }
 
   get bulletVisible() {
-    return this.action == 'on' ? true : false;
+    return this._bulletVisible;
   }
-  
+
   _onBullet() {
-    this.action = 'on';
+    this._bulletVisible=true;
     this.danmuSwitch.className = "M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOn";
   }
   _offBullet() {
-    this.action = 'off';
+    this._bulletVisible=false;
     this.danmuSwitch.className = "M706C61796572-control-danmuSwitch M706C61796572-btn M706C61796572-control-danmuOff";
   }
 }

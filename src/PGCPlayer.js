@@ -15,42 +15,75 @@ class PGCPlayer extends EventEmitter {
 
   render() {
     Control.stage = document.getElementsByClassName("video-container")[0];
-    Control.getInstance.renderCtrol(['Play', 'Reload'], 'left')
+    Control.getInstance.renderCtrol(['Play', 'Refresh'], 'left')
     Control.getInstance.renderCtrol(['FullScreen', 'PageFull', 'Voice', 'Sharpness', 'Bullet'], 'right');
 
     Control.getInstance.renderAct();
-    Control.getInstance.rendPreView("loading");
+    Control.getInstance.rendPreView("end",'');
     Control.getInstance.renderTips();
     Control.getInstance.renderTitle();
 
     Control.getInstance.setAttribute('Play', 'visible', true);
     Control.getInstance.setAttribute('Play', 'playState', false);
-    Control.getInstance.setAttribute('Sharpness', 'sharpnessList', {
-      'currentResolution': '高清',
-      'select': ['蓝光', '高清', '标清']
-    });
-    Control.getInstance.setAttribute('Bullet', 'bulletVisible', false);
-    Control.getInstance.setAttribute('PreView', 'visible', false);
-    Control.getInstance.setAttribute("PreView", 'State', 'end');
-    Control.getInstance.setAttribute("Tips", 'Content', 'lei啊lei啊，快活啊！');
-    Control.getInstance.setAttribute("Title", 'Content', 'lei啊lei啊，快活啊！');
+    Control.getInstance.setAttribute('Sharpness', 'sharpnessList', [{label:'清晰度1',level:1},{label:'清晰度2',level:2},{label:'清晰度3',level:3}]);
+    Control.getInstance.setAttribute('Sharpness','curSharpnessIndex',2);
+    console.log(Control.getInstance.getAttribute('Sharpness','curSharpnessVo'));
+    // Control.getInstance.setAttribute('Bullet', 'bulletVisible', false);
+    Control.getInstance.setAttribute('PreView', 'visible', true);
+    Control.getInstance.setAttribute("Tips", 'content', 'lei啊lei啊，快活啊！');
+    Control.getInstance.setAttribute("Title", 'content', 'lei啊lei啊，快活啊！');
+
+    Control.getInstance.setAttribute('ActView','visible',true);
+    Control.getInstance.setAttribute('ActView','viewData',{videoTitle: '爱奇艺大剧场',videoDuration: 222,videoPlayTime: 111});
+
     console.log(Control.getInstance.getAttribute('Play', 'visible'));
     console.log(Control.getInstance.getAttribute('Play', 'playState'));
+
+  
     Control.getInstance.on('xycControlView', (arg) => {
+      console.log(arg.module,':::::',arg.info);
       switch (arg.module) {
         case 'Play':
           if (Control.getInstance.getAttribute('Play','playState')) {
-            console.log('播放状态')
+            console.log('点击播放')
           } else {
-            console.log('暂停状态')
+            console.log('点击暂停')
           }
+          break;
+        case 'Refresh':
+          console.log('点击刷新');
+          break;
+        case 'Bullet':
+          switch(arg.info){
+            case 'bulletVisible':
+            console.log('弹幕开关',Control.getInstance.getAttribute('Bullet','bulletVisible'));
+            default:
+              break;
+          }
+          break;
+        case 'Sharpness':
+          console.log('选择当前清晰度信息',Control.getInstance.getAttribute('Sharpness','curSharpnessVo'));
+          break;
+        case 'Voice':
+          console.log('音量',arg.info)
+          break;
+        case 'PageFull':
+          if(Control.getInstance.getAttribute('PageFull','isPageFull')){
+           
+          }else{
+
+          }
+          Control.getInstance.setAttribute('FullScreen','isFullScreen',false)
           break;
         case 'FullScreen':
           if(Control.getInstance.getAttribute('FullScreen','isFullScreen')){
             Control.getInstance.setAttribute('Title','visible',true);
+            Control.getInstance.setAttribute('ActView','visible',false);
           }else{
-            Control.getInstance.setAttribute('Title','visible',true);
+            Control.getInstance.setAttribute('Title','visible',false);
+            Control.getInstance.setAttribute('ActView','visible',true);
           }
+          Control.getInstance.setAttribute('PageFull','isPageFull',false)
           break;
         default:
           break;

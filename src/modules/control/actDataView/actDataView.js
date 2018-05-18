@@ -5,16 +5,17 @@ class act {
     this.name = 'ActDataView';
     this._view = null;
     this._viewItems = null;
+    this._data=null;
   }
   render() {
     this._view = document.createElement('div');
     this._view.className = 'act-data';
     this._view.innerHTML = ` <span></span>
-    <p class="act-title">飞屋环游记英文版（1080P高清爱奇艺独家播放）</p>
+    <p class="act-title">（1080P高清爱奇艺独家播放）</p>
     <i class="act-line"></i>
     <div class="act-time">
       <p>总时长：</p>
-      <p class="act-duration">00:56:18</p>
+      <p class="act-duration">01:00:00</p>
       <i>
         <i class="act-playtime"></i>
       </i>
@@ -29,13 +30,17 @@ class act {
       time: document.getElementsByClassName('act-time')[0]
     }
   }
-  setData(obj) {
+  set viewData(obj) {
+    this._data=obj;
     this._viewItems.title.innerText = (obj && obj.videoTitle) || '爱奇艺小剧场';
     this._viewItems.time.style.display = this._viewItems.line.style.display = (obj && obj.videoDuration && obj.videoDuration > 0) ? 'block' : 'none';
     this._viewItems.duration.innerText = this.sec_to_time(obj.videoDuration);
     this._viewItems.playtime.style.width = Math.floor(118 * obj.videoPlayTime / obj.videoDuration) + 'px';
   }
 
+  get viewData(){
+    return this._data;
+  }
   /**
    * 时间秒数格式化 s(S)
    */
@@ -65,6 +70,14 @@ class act {
 
   set visible(bool) {
     this._view.style.display = bool ? 'block' : 'none';
+  }
+
+  get visible() {
+    return this._view.style.display == 'none' ? false : true;
+  }
+
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
   }
 }
 

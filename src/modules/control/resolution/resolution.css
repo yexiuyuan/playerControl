@@ -38,7 +38,7 @@
   z-index: -1;
 }
 
-.M706C61796572-control-resolution>ul.showUp {
+.M706C61796572-control-resolution>ul.M706C61796572-showUp {
   bottom: 37px;
 }
 
@@ -52,7 +52,17 @@
   color: #FFF;
 }
 
+.M706C61796572-control-resolution>ul>li.M706C61796572-selectStream {
+  background: #23d31e;
+  color: #fff;
+}
+
 .M706C61796572-control-resolution>ul>li:hover {
+  background: #23d31e;
+  color: #fff;
+}
+
+.M706C61796572-control-resolution>ul>li:selection {
   background: #23d31e;
   color: #fff;
 }

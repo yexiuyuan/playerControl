@@ -107,9 +107,6 @@ class setVoice extends btn {
     this.actionWithVoice(curPersent)
   }
 
-
-
-
   get voiceSet() {
     return this.currentVoice;
   }

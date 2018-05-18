@@ -18,11 +18,9 @@ class playBtn extends btn {
 
     onClickHandle(e) {
         if (this.action == 'Play') {
-            this.action = 'Pause';
-            this.play.className = 'M706C61796572-control-pauseBtn M706C61796572-btn';
+            this._pause();
         } else {
-            this.action = 'Play';
-            this.play.className = 'M706C61796572-control-playBtn M706C61796572-btn';
+            this._play();
         }
         super.disptchStatusEvent(this.name, this.action)
     }
@@ -41,16 +39,30 @@ class playBtn extends btn {
 
     set playState(bool) {
         if (bool) {
-            this.action = 'Play';
-            this.play.className = 'M706C61796572-control-playBtn M706C61796572-btn';
+            this._play();
         } else {
-            this.action = 'Pause';
-            this.play.className = 'M706C61796572-control-pauseBtn M706C61796572-btn';
+            this._pause();
         }
     }
 
     get playState() {
         return this.action == 'Play' ? false : true;
+    }
+
+    _play() {
+        this.action = 'Play';
+        this.play.className = 'M706C61796572-control-playBtn M706C61796572-btn';
+        this._tip='播放';
+    }
+
+    _pause() {
+        this.action = 'Pause';
+        this.play.className = 'M706C61796572-control-pauseBtn M706C61796572-btn';
+        this._tip='暂停';
+    }
+
+    set _tip(str) {
+        this.play.title = str;
     }
 }
 

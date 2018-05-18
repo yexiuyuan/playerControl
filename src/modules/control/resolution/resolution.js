@@ -9,16 +9,18 @@ class resolution extends btn {
     this.resolutionUl = null;
     this.currentResolutionP = null;
     this.currentResolutionSpan = null;
-    this.data = null;
+
+    this._streamArr = null; //流数组
+    this._selectIndex = 0;
   }
   render() {
-    console.log('resolution render')
     this.resolution = document.createElement('div');
     this.resolutionUl = document.createElement('ul');
     this.currentResolutionP = document.createElement('p');
     this.currentResolutionSpan = document.createElement('span');
     // this.resolution.display = "block";
     this.resolution.className = 'M706C61796572-control-resolution M706C61796572-btn';
+    this._tip='清晰度'
     this.node.appendChild(this.resolution);
     this.resolution.appendChild(this.currentResolutionP);
     this.resolution.appendChild(this.resolutionUl);
@@ -29,39 +31,61 @@ class resolution extends btn {
 
   //点击整个组件触发的
   onClickHandle(e) {
-    super.disptchStatusEvent(this.name, e)
+    if (this._selectIndex == e) return;
+    this._selectIndex = e;
+    this._refresh();
+    super.disptchStatusEvent(this.name, this._streamArr[this._selectIndex]);
   }
 
   //弹出选择列表动作
   showUpSelect() {
-    if (this.resolutionUl.className == "showUp") {
+    if (this.resolutionUl.className == "M706C61796572-showUp") {
       this.resolutionUl.className = "";
     } else {
-      this.resolutionUl.className = "showUp";
+      this.resolutionUl.className = "M706C61796572-showUp";
     }
   }
   // 点击选择列表触发
   onSelectHandle(event) {
     let ev = ev || event;
-    var res = ev.target.getAttribute("data-index");
-    var resText = ev.target.innerText;
-    this.currentResolutionSpan.innerText = resText;
+    let res = ev.target.getAttribute("data-index");
     this.resolutionUl.className = "";
-    this.onClickHandle(res)
+    this.onClickHandle(res);
   }
 
-  set sharpnessList(data) {
-    var contentHTML = '';
-    this.data = data;
-    this.currentResolutionSpan.innerText = data.currentResolution;
-    for (let i = 0; i < data.select.length; i++) {
-      contentHTML += `<li data-index="${i}">${data.select[i]}</li>`;
-    }
-    this.resolutionUl.innerHTML = contentHTML;
+  set sharpnessList(arr) {
+    this._streamArr = arr;
+    this._refresh();
   }
 
   get sharpnessList() {
-    return this.data;
+    return this._streamArr;
+  }
+
+  get curSharpnessVo() {
+    return this._streamArr[this._selectIndex];
+  }
+
+  set curSharpnessIndex(index) {
+    this._selectIndex = index;
+    this._refresh();
+  }
+
+  get curSharpnessIndex() {
+    return this._streamArr[this._selectIndex];
+  }
+
+  _refresh() {
+    let contentHTML = '';
+    for (let i = this._streamArr.length - 1; i >= 0; i--) {
+      contentHTML += `<li class="${i==this._selectIndex?'M706C61796572-selectStream':''}" data-index="${i}">${this._streamArr[i].label}</li>`;
+    }
+    this.resolutionUl.innerHTML = contentHTML;
+    this.currentResolutionSpan.innerText = this._streamArr[this._selectIndex].label;
+  }
+
+  _tip(str){
+    this.resolution.title=str;
   }
 
   hasOwnAttribute(str) {

@@ -17,6 +17,7 @@ class fullScreen extends btn {
     console.log('fullScreen render')
     this.fullScreen = document.createElement('div');
     this.fullScreen.className = 'M706C61796572-control-fullScreen M706C61796572-btn';
+    this._tip = '全屏';
     this.node.appendChild(this.fullScreen);
     this.fullScreen.addEventListener('click', this.onClickHandle.bind(this));
 
@@ -32,12 +33,14 @@ class fullScreen extends btn {
           this.fullScreen.className = 'M706C61796572-control-resizeScreen M706C61796572-btn';
           this.videoNode.style.width = "100%";
           this.videoNode.style.height = "100%";
+          this._tip = '退出全屏';
         } else {
           console.log('退出全屏');
-          this.action = 'exitFullScreen';
+          this.action = 'normal';
           this.fullScreen.className = 'M706C61796572-control-fullScreen M706C61796572-btn';
           this.videoNode.style.width = this.oldSize["width"] + "px";
           this.videoNode.style.height = this.oldSize["height"] + "px";
+          this._tip = '全屏';
         }
         super.disptchStatusEvent(this.name, this.action)
       });
@@ -92,10 +95,18 @@ class fullScreen extends btn {
   }
 
   set isFullScreen(bool) {
-    this.onClickHandle(null);
+    if (bool) {
+      this.requestFullScreen();
+    } else {
+      this.exitFullScreen();
+    }
   }
   hasOwnAttribute(str) {
     return ((this.__proto__).hasOwnProperty(str));
+  }
+
+  set _tip(str) {
+    this.fullScreen.title = str;
   }
 }
 

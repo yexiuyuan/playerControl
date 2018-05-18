@@ -61,7 +61,7 @@ class control {
 
   itemsDicFunc() {
     this.itemsDic["Play"] = PlayBtn;
-    this.itemsDic["Reload"] = reloadBtn;
+    this.itemsDic["Refresh"] = reloadBtn;
     this.itemsDic["Bullet"] = danmuSwitch;
     this.itemsDic["Sharpness"] = resolution;
     this.itemsDic["Voice"] = setVoice;
@@ -86,7 +86,7 @@ class control {
         item.name = name;
         if (this.setItemToDic(name, item)) {
           item.render();
-          item.on('xycControlView', this.statusEvent.bind(this));
+          item.on('xycControlView', this._statusEvent.bind(this));
         }
       } else {
         console.log(name, '没找到')
@@ -113,32 +113,31 @@ class control {
     }
   }
 
-
+/**
+ * 小剧场信息
+ */
   renderAct() {
-    if (!this.actView) {
-      this.actView = new ActView(control.stage);
-      this.actView.render();
+    if (!this.isHasInstanceByName('ActView')) {
+      let actView = new ActView(control.stage);
+      if(this.setItemToDic('ActView',actView)){
+        actView.render();
+      }
     }
-
-    this.actView.setData({
-      videoTitle: '爱奇艺大剧场',
-      videoDuration: 222,
-      videoPlayTime: 111
-    });
   }
 
   /**
    * loading end error
    * @data  
+   * @msg 
    */
-  rendPreView(data) {
+  rendPreView(data,msg) {
     if (!this.isHasInstanceByName('PreView')) {
       let preView = new PreView(control.stage);
       if (this.setItemToDic('PreView', preView)){
         preView.render();
       }
     }
-    this.getInstanceByName('PreView').State = data;
+    this.getInstanceByName('PreView').state(data,msg);
   }
   /**
    * 提示
@@ -151,9 +150,8 @@ class control {
         tips.render();
       }
     }
-    this.getInstanceByName('Tips').Content='你好啊!爱奇艺小剧场';
+    this.setAttribute('Tips','content','欢迎来到爱奇艺大直播！！！');
   }
-
   /**
    * 直播标题
    * @data
@@ -165,50 +163,10 @@ class control {
         title.render();
       }
     }
-    this.getInstanceByName('Title').Content = '大家好！这里是爱奇艺小剧`1111场。';
+    this.setAttribute('Title','content','欢迎来到爱奇艺大直播！！！');
   }
 
-  statusEvent(arg) {
-    console.log(arg.module, ':::::::', arg.info)
-    switch (arg.module) {
-      case "reload":
-        console.log('刷新')
-        break;
-
-      case "danmuSwitch":
-        switch (arg.info) {
-          case 'on':
-            console.log('弹幕打开')
-            break;
-          case 'off':
-            console.log('弹幕关闭')
-            break;
-        }
-        break;
-
-      case "resolution":
-        console.log("用户刚刚选择了" + arg.info + "档分辨率")
-        break;
-
-      case "FullScreen":
-        if (arg.info == 'fullScreen') {
-        
-          (this.actView) && (this.actView.visible = false);
-        } else if (arg.info == 'exitFullScreen') {
-           
-          (this.actView) && (this.actView.visible = true);
-        }
-        break;
-      case "PageFull":
-        if (arg.info == 'normal') {
-
-        } else if (arg.info == 'pageFull') {
-          (this.getInstanceByName('FullScreen').isFullScreen == true) && (this.getInstanceByName('FullScreen').isFullScreen = true);
-        }
-        break;
-      default:
-        break;
-    }
+  _statusEvent(arg) {
     this._disptchStatusEvent(arg.module, arg.info);
   }
 
@@ -245,7 +203,7 @@ class control {
    */
   setAttribute(name, attr, value) {
     if (this.isHasInstanceByName(name) == false) {
-      Log.L(this.name, '不存在该组件');
+      Log.L(name, '不存在该组件');
       return;
     }
     let instance = this.getInstanceByName(name);

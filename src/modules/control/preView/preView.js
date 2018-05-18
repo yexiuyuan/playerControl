@@ -16,7 +16,7 @@ class preView {
     return ((this.__proto__).hasOwnProperty(str));
   }
 
-  set State(value) {
+  state(value) {
     this.preView.style.display = 'block';
     // data是SDK传进来的类型分为三种loading，leave，end
     let contentHTML = "";
@@ -33,9 +33,10 @@ class preView {
         this.preView.innerHTML = contentHTML;
         break;
       case "leave":
+        let str=msg?msg:'主播离开了，马上回来哦~';
         contentHTML += `
           <div class="preViewContent">
-            <p>主播离开了，马上回来哦~</p>
+            <p>${str}</p>
           </div>
         `;
         this.preView.innerHTML = contentHTML;
