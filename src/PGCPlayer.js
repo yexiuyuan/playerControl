@@ -39,7 +39,10 @@ class PGCPlayer extends EventEmitter {
     console.log(Control.getInstance.getAttribute('Play', 'visible'));
     console.log(Control.getInstance.getAttribute('Play', 'playState'));
 
-  
+
+    console.log(Control.getInstance.getAttribute('Voice','volunm'));
+    Control.getInstance.setAttribute('Voice','volunm',100);
+    console.log(Control.getInstance.getAttribute('Voice','volunm'));
     Control.getInstance.on('xycControlView', (arg) => {
       console.log(arg.module,':::::',arg.info);
       switch (arg.module) {
@@ -66,6 +69,7 @@ class PGCPlayer extends EventEmitter {
           break;
         case 'Voice':
           console.log('音量',arg.info)
+          console.log(Control.getInstance.getAttribute('Voice','volunm'))
           break;
         case 'PageFull':
           if(Control.getInstance.getAttribute('PageFull','isPageFull')){

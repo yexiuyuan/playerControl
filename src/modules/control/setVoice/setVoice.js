@@ -18,18 +18,9 @@ class setVoice extends btn {
    * 组件渲染
    */
   render() {
-    console.log('resolution render')
     this.setVoice = document.createElement('div'); //创建设置音量容器
     this.setVoice.className = "M706C61796572-control-setVoice M706C61796572-btn";
-    //下面是拖拽条的NTML内容
-    var html = `<div id="leftIcon"></div>
-						<div class="rightBar">
-							<div class="rightHighLight" style="width:50%"></div>
-							<div class="handBar" style="left:50%">
-								<p class="voiceTip">50%</p>
-							</div>
-						</div>`;
-    this.setVoice.innerHTML = html;
+    this._initVoice(10);
     this.node.appendChild(this.setVoice);
     this.handBar = this.setVoice.getElementsByClassName("handBar")[0];
     this.rightHighLight = this.setVoice.getElementsByClassName("rightHighLight")[0];
@@ -107,8 +98,29 @@ class setVoice extends btn {
     this.actionWithVoice(curPersent)
   }
 
-  get voiceSet() {
+  get volunm() {
     return this.currentVoice;
+  }
+
+  set volunm(value) {
+    this._initVoice(value);
+  }
+
+  _initVoice(value) {
+    //下面是拖拽条的NTML内容
+    var html = `<div id="leftIcon"></div>
+   <div class="rightBar">
+     <div class="rightHighLight" style="width:${value}%"></div>
+     <div class="handBar" style="left:${value}%">
+       <p class="voiceTip">${value}%</p>
+     </div>
+   </div>`;
+    this.currentVoice = value;
+    this.setVoice.innerHTML = html;
+  }
+
+  hasOwnAttribute(str) {
+    return ((this.__proto__).hasOwnProperty(str));
   }
 }
 export default setVoice;
