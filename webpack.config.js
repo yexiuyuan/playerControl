@@ -9,7 +9,7 @@ module.exports = {
     filename: 'pgcplayer.js',
   },
   devServer: {
-    port: 8080,
+    port: 9090,
   },
   resolve: {
     extensions: ['*', '.js', '.styl']

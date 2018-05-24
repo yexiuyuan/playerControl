@@ -8,6 +8,10 @@
   font-size: 14px;
 }
 
+.M706C61796572-control-resolution:hover {
+    color: #fff;
+  }
+
 .M706C61796572-control-resolution>p {
   /* width: 100%;
   height: 100%;
@@ -32,7 +36,7 @@
   width: 124px;
   border-radius: 3px;
   padding: 10px 0px;
-  -webkit-transition: 0.5s all cubic-bezier(0.42, 0, 0.15, 1.18);
+  /* -webkit-transition: 0.5s all cubic-bezier(0.42, 0, 0.15, 1.18); */
   left: -15px;
   bottom: -500px;
   z-index: -1;
@@ -44,10 +48,10 @@
 
 .M706C61796572-control-resolution>ul>li {
   width: 124px;
-  height: 30px;
+  height: 40px;
   border-radius: 14px;
   text-align: center;
-  line-height: 30px;
+  line-height: 40px;
   font-size: 15px;
   color: #FFF;
 }

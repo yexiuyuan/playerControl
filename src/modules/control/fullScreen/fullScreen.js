@@ -38,8 +38,10 @@ class fullScreen extends btn {
           console.log('退出全屏');
           this.action = 'normal';
           this.fullScreen.className = 'M706C61796572-control-fullScreen M706C61796572-btn';
-          this.videoNode.style.width = this.oldSize["width"] + "px";
-          this.videoNode.style.height = this.oldSize["height"] + "px";
+          
+          this.oldSize=JSON.parse(localStorage.getItem('oldSize'));
+          this.videoNode.style.width = "";
+          this.videoNode.style.height ="";
           this._tip = '全屏';
         }
         super.disptchStatusEvent(this.name, this.action)
@@ -85,6 +87,7 @@ class fullScreen extends btn {
       "width": obj.offsetWidth,
       "height": obj.offsetHeight
     };
+    localStorage.setItem('oldSize',JSON.stringify(this.oldSize));
   }
 
   get isFullScreen() {

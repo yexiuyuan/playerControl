@@ -2,9 +2,11 @@
 	width: 100%;
 	height: 100%;
 	background:url(//test-static-x.pps.tv/flash/test/asset/loading_bg.png) no-repeat;
-	background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-color: #222;
 	position: absolute;
-	top: 0;
+    top: 0;
+    z-index: 100;
 }
 .M706C61796572-control-preView>.preViewContent{
 	user-select: none;
@@ -22,7 +24,7 @@
 }
 .M706C61796572-control-preView>.preViewContent a{
 	display: inline-block;
-	width: 131px;
+	width: 171px;
 	height: 41px;
 	background: url(../img/review_btn.png) no-repeat;
 	margin-top: 30px;

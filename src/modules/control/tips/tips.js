@@ -19,9 +19,6 @@ class tips {
   set content(str) {
     this._view.innerHTML = str;
     this.visible=true;
-    setTimeout(() => {
-      this.visible=false;
-    }, 3000)
   }
 
   set visible(bool) {

@@ -2,42 +2,91 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 </head>
 <style>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  ul{
-    list-style: none;
-  }
-  .control-left{
-    float: left;
-    height: 20px;
-  }
-  .control-right{
-    float: right;
-    height: 20px;
-  }
-  .video-container{
-    width: 800px;
-    height: 450px;
-    background-color: aquamarine;
-    position: relative;
-    overflow: hidden;
-    z-index: 99
-  }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .control-left {
+        float: left;
+        height: 20px;
+    }
+
+    .control-right {
+        float: right;
+        height: 20px;
+    }
+
+    .video-container {
+        width: 540px;
+        height: 320px;
+        background-color: aquamarine;
+        position: relative;
+        overflow: hidden;
+        z-index: 99;
+        top:100px;
+    }
+
+    /* #menu {
+        height: 200px;
+        width: 50px;
+        border: 1px solid gray;
+        background-color: antiquewhite;
+        padding: 10px;
+        display: none;
+        position: absolute;
+    } */
+
+    /* ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        line-height: 40px;
+        color: aliceblue;
+    }
+
+    ul,
+    li:hover {
+        color: red
+    } */
 </style>
 
 <body>
-  <div class="video-container">
-  </div>
+    <div class="video">
+        <div class="video-container">
 
-  <script src="dist/pgcplayer.js"></script>
-  <script>
-  
-  </script>
+        </div>
+    </div>
+    <script src="dist/pgcplayer.js"></script>
+    <script>
+        // var menu = document.getElementById("menu");
+        // var ele = document.getElementsByClassName('video-container')[0]
+        // ele.oncontextmenu = function (ev) {
+        //     var oEvent = ev || event;
+        //     //自定义的菜单显示
+        //     menu.style.display = "block";
+        //     //让自定义菜单随鼠标的箭头位置移动
+        //     menu.style.left = oEvent.clientX + "px";
+        //     menu.style.top = oEvent.clientY + "px";
+        //     //return false阻止系统自带的菜单，
+        //     //return false必须写在最后，否则自定义的右键菜单也不会出现
+        //     return false;
+
+        // }
+        // //实现点击document，自定义菜单消失
+        // ele.onclick = function () {
+
+        //     menu.style.display = "none";
+        // }
+    </script>
 </body>
 
 </html>

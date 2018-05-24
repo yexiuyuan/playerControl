@@ -6,13 +6,15 @@
   cursor: pointer;
 }
 
-.M706C61796572-control-danmuSwitch:before {
+.M706C61796572-control-danmuSwitch span {
   content: "弹幕";
   line-height: 31px;
   float: left;
   margin-left: -37px;
   color: #c7c7c7;
   font-size: 16px;
+  cursor: default;
+  user-select: none;
 }
 
 .M706C61796572-control-danmuOn {

@@ -12,7 +12,8 @@ class pageFull extends btn {
   render() {
     this.pageFull = document.createElement('div');
     this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
-    this.action = 'normal'
+    this.action = 'normal';
+    this._tip='网页全屏';
     this.node.appendChild(this.pageFull);
     this.pageFull.addEventListener('click', this.pageFullHandler.bind(this));
   }
@@ -35,7 +36,6 @@ class pageFull extends btn {
   }
 
   set isPageFull(bool) {
-    console.log('aaaaaaa',bool)
     if(bool){
       this._pageFull();
       
@@ -65,7 +65,17 @@ class pageFull extends btn {
     this.pageFull.className = 'M706C61796572-control-pageFull M706C61796572-btn';
     this._tip = '网页全屏'
     this.action = 'normal';
+    // localStorage.setItem('oblSize',JSON.stringify(this.oldSize));
   }
+
+  set getParentNode(obj) {
+    let oldSize = {
+      "width": obj.offsetWidth,
+      "height": obj.offsetHeight
+    };
+    localStorage.setItem('oldSize',JSON.stringify(oldSize));
+  }
+
   hasOwnAttribute(str) {
     return ((this.__proto__).hasOwnProperty(str));
   }
