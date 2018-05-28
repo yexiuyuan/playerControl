@@ -22,7 +22,10 @@ import './control_css.css';
 class control {
     static ins = null;
     static stage = null;
-    _inControl;//鼠标是否在菜单栏
+    _inControl; //鼠标是否在菜单栏
+    _showControl = true; //控制栏是否在舞台上
+    _inStage = false;
+    _onFocusStage=false;//当前焦点是否在舞台上
     constructor() {
         this.name = 'ControlModule';
         this.actView = null; //小剧场
@@ -48,29 +51,59 @@ class control {
         this._rightEleArr = new Array(); //control右边
         this.itemsDicFunc();
 
-        this.controlVisible=false;
-
         control.stage.addEventListener('mouseleave', this._eventHandler.bind(this));
         control.stage.addEventListener('mouseenter', this._eventHandler.bind(this));
         control.stage.addEventListener('mousemove', this._eventHandler.bind(this));
 
-        this.main.addEventListener('mouseleave',()=>{
-            this._inControl=false;
+        // this.main.addEventListener('webkitTransitionEnd',(e)=>{
+        //     console.log('缓动完成');
+        // });
+
+        this.main.addEventListener('mouseleave', () => {
+            this._inControl = false;
         });
-        
-        this.main.addEventListener('mouseenter',()=>{
-            this._inControl=true;
+
+        this.main.addEventListener('mouseenter', () => {
+            this._inControl = true;
         });
 
         this._vestInterval();
 
+        document.addEventListener('keydown', this._keyBoardHnalder.bind(this));
+
+        //以下两个监听是判断当前焦点是否在video中的依据
+        document.addEventListener('click',(e)=>{
+            if(e.target==control.stage){
+                this._onFocusStage=true;
+            }else{
+                this._onFocusStage=false;
+            }
+        })
+      
+
     }
+
+    _keyBoardHnalder(e) {
+        if (this._onFocusStage == false ) {
+            return
+        }else { //焦点在播放器
+            if (e.key == 'ArrowUp') {
+                this.setAttribute('Voice', 'changeVolunm', 10);
+            } else if (e.key == 'ArrowDown') {
+                this.setAttribute('Voice', 'changeVolunm', -10);
+            }
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+    }
+
     _vestInterval() {
         if (this._mouseInterval != null) {
             return
         }
         this._mouseInterval = setInterval(() => {
-            if (this.controlVisible) {
+            if (this._showControl == true) {
                 this._controlHide();
             }
         }, 5000);
@@ -82,46 +115,58 @@ class control {
     }
 
     _controlHide() {
-        if (this.controlVisible==false) {
+        if (this._showControl == false) {
             return
         }
-        if(this._inControl==true){
+        if (this._inControl == true) {
             return;
         }
-        // this.controlVisible = false;
-        
+        this._showControl = false;
+        this.controlHide();
         this.setAttribute('Tips', 'posY', 0)
         this._killInterval();
         this._disptchStatusEvent('LineHeight', 0)
+        if (this.isHasInstanceByName('ActView')) {
+            this.setAttribute('ActView', 'show', false);
+        }
+        this.setAttribute('Title', 'visible', false);
     }
 
     _controlShow() {
-        if (this.controlVisible==true) {
+        if (this._showControl == true) {
             return
         }
-        this.controlVisible = true;
+        this._showControl = true;
+        this.controlShow();
+
         this.setAttribute('Tips', 'posY', 33)
         this._vestInterval()
-        if(this.isHasInstanceByName('ActView')){
-            this._disptchStatusEvent('LineHeight', 40)
-        }else{
+        if (this.isHasInstanceByName('ActView')) {
+            this._disptchStatusEvent('LineHeight', 40);
+            this.setAttribute('ActView', 'show', true);
+        } else {
             this._disptchStatusEvent('LineHeight', 0)
         }
-        if(this.getAttribute('Title','visible')){
+        if (this.getAttribute('Title', 'visible')) {
             this._disptchStatusEvent('LineHeight', 40)
         }
+        this.setAttribute('Title', 'visible', ((this.isFullScreen) ? true : false));
     }
 
     _eventHandler(e) {
         if (e.type == 'mouseenter') {
+            // document.addEventListener('keydown',this._keyBoardHnalder.bind(this));
+            this._inStage = true;
             this._controlShow();
         } else if (e.type == 'mouseleave') {
+            // document.removeEventListener('keydown',this._keyBoardHnalder.bind(this));
+            this._inStage = false;
             setTimeout(() => {
                 this._controlHide();
-            }, 1000);   
+            }, 1000);
         } else if (e.type == 'mousemove') {
             this._controlShow()
-        }else if(e.type=='mouseover'){
+        } else if (e.type == 'mouseover') {
             this._controlShow();
         }
     }
@@ -247,27 +292,27 @@ class control {
     /**
      * 鼠标右键
      */
-    renderMenu(data){
-         if(!this.isHasInstanceByName('Menu')){
-             let menu=new Menu(control.stage);
-             if(this.setItemToDic('Menu',menu)){
-                 menu.render(data);
-                 menu.on('xycControlView', this._statusEvent.bind(this));
-             }
-         }
-     }
+    renderMenu(data) {
+        if (!this.isHasInstanceByName('Menu')) {
+            let menu = new Menu(control.stage);
+            if (this.setItemToDic('Menu', menu)) {
+                menu.render(data);
+                menu.on('xycControlView', this._statusEvent.bind(this));
+            }
+        }
+    }
 
-     /**
-      * logo 水印
-      */
-     renderLogo(){
-        if(!this.isHasInstanceByName('Logo')){
-            let logo=new Logo(control.stage);
-            if(this.setItemToDic('Logo',logo)){
+    /**
+     * logo 水印
+     */
+    renderLogo() {
+        if (!this.isHasInstanceByName('Logo')) {
+            let logo = new Logo(control.stage);
+            if (this.setItemToDic('Logo', logo)) {
                 logo.render();
             }
         }
-     }
+    }
 
     _statusEvent(arg) {
         this._disptchStatusEvent(arg.module, arg.info);
@@ -282,12 +327,19 @@ class control {
 
     set controlVisible(bool) {
         this.main.style.display = bool ? 'block' : 'none';
-        this.setAttribute('Title', 'visible', (bool) ? ((this.isFullScreen) ? true : false) : false);
-        this.setAttribute('ActView', 'visible', (bool) ? ((this.isFullScreen) ? false : true) : false)
     }
 
     get controlVisible() {
-        return this.main.style.display == 'none' ? false : true;
+        return this._showControl;
+    }
+
+    //通过css来实现缓动
+    controlShow() {
+        this.main.className = 'M706C61796572-control M706C61796572-control-show';
+    }
+
+    controlHide() {
+        this.main.className = 'M706C61796572-control M706C61796572-control-hide';
     }
 
     get isFullScreen() {

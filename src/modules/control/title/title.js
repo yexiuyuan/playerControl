@@ -23,7 +23,8 @@ class title {
         this.visible = false;
 
         setInterval((e) => {
-            this._time.innerHTML = (new Date()).toLocaleTimeString();
+            let time=(new Date()).toLocaleTimeString('chinese',{hour12:false});
+            this._time.innerHTML = time.substring(0,time.length-3);
         }, 1000);
 
     }

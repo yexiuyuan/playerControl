@@ -1,21 +1,39 @@
 .M706C61796572-control {
-  display: block;
-  height: 33px;
-  width: 100%;
-  background: #222;
-  bottom: 0px;
-  position: absolute;
-  z-index: 99;
+    display: block;
+    height: 33px;
+    width: 100%;
+    background: #222;
+    bottom: 0px;
+    position: absolute;
+    z-index: 99;
 }
+
+.M706C61796572-control-show {
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    bottom: 0px;
+}
+
+.M706C61796572-control-hide {
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    bottom: -33px;
+}
+
 .M706C61796572-control-left {
-  float: left;
-  height: 33px;
-  position: relative;
-  z-index: 99
+    float: left;
+    height: 33px;
+    position: relative;
+    z-index: 99
 }
+
 .M706C61796572-control-right {
-  float: right;
-  height: 33px;
-  position: relative;
-  z-index: 99
+    float: right;
+    height: 33px;
+    position: relative;
+    z-index: 99
 }

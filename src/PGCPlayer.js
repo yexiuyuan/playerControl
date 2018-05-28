@@ -27,7 +27,7 @@ class PGCPlayer extends EventEmitter {
         Control.getInstance.renderCtrol(['Play', 'Refresh'], 'left')
         Control.getInstance.renderCtrol(['FullScreen', 'PageFull', 'Voice', 'Sharpness', 'Bullet'], 'right');
 
-        Control.getInstance.controlVisible=false;
+        // Control.getInstance.controlVisible=false;
 
         Control.getInstance.renderAct();
         Control.getInstance.rendPreView("end", '');
@@ -125,7 +125,7 @@ class PGCPlayer extends EventEmitter {
                     Control.getInstance.setAttribute('PageFull', 'isPageFull', false)
                     break;
                 case 'LineHeight':
-                    console.log('是否有标题、ACT、底部且高度是', arg.info)
+                    // console.log('是否有标题、ACT、底部且高度是', arg.info)
                     break;
                 case 'Menu':
                     console.log('右键键值',arg.info)

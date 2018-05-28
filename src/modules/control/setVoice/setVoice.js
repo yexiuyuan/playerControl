@@ -51,23 +51,53 @@ class setVoice extends btn {
      * 音量变化的联动
      */
     actionWithVoice(e) {
+        this._showVoiceTips = true;
         this.voiceTip.innerText = e + '%';
         this.rightHighLight.style.width = e + '%';
+        if (this._changeVolunmTimer != null) {
+            clearTimeout(this._changeVolunmTimer);
+            this._changeVolunmTimer = null;
+        }
+        this._changeVolunmTimer = setTimeout(() => {
+            this._showVoiceTips = false;
+        }, 1000);
+        this._tips='设置静音';
         if (e == 0) {
-            console.log("静音");
             this.leftIcon.className = "mute";
+            this._tips='取消静音';
         } else if (e > 0 && e <= 30) {
-            console.log("小音量");
-            this.leftIcon.className = "smallVoice";
+            this.leftIcon.className = "smallVoice";  
         } else if (e > 30 && e <= 60) {
-            console.log("中音量");
             this.leftIcon.className = "middleVoice";
         } else if (e > 60 && e <= 100) {
-            console.log("大音量");
             this.leftIcon.className = "bigVoice";
         }
         this.currentVoice = e;
         super.disptchStatusEvent(this.name, e)
+    }
+
+    _changeVolunmTimer; //是否改变声音
+    set changeVolunm(value) {
+        this.currentVoice += value;
+        if (this.currentVoice >= 100) {
+            this.volunm = 100;
+        } else if (this.currentVoice <= 0) {
+            this.volunm = 0;
+        } else if (this.currentVoice < 100 && this.currentVoice > 0) {
+            this.volunm = this.currentVoice;
+        }
+
+        this.actionWithVoice(this.volunm)
+    }
+
+    set _showVoiceTips(bool) {
+        if (bool == true) {
+            this.voiceTip.style.visibility = 'visible';
+            this.voiceTip.style.opacity = 1;
+        } else {
+            this.voiceTip.style.visibility = 'hidden';
+            this.voiceTip.style.opacity = 0;
+        }
     }
 
     /**
@@ -79,10 +109,12 @@ class setVoice extends btn {
             drag.clickFlag = true
             return;
         }
+        if(ev.target.className=='handBar'){
+            return;
+        }
         var oEvt = ev || event;
         var barWidth = this.rightBar.offsetWidth;
         var disX = oEvt.offsetX;
-        console.log(oEvt.offsetX, oEvt.layerX)
         var curPersent = ~~(disX / barWidth * 100);
         var w = this.handBar.offsetWidth;
         this.handBar.style.left = disX - w / 2 + 'px';
@@ -95,7 +127,7 @@ class setVoice extends btn {
 
     set volunm(value) {
         this.rightHighLight.style.width = value + '%';
-        this.handBar.style.left = value/2 + 'px';
+        this.handBar.style.left = value / 2 + 'px';
         this.voiceTip.innerText = value + '%';
         this.currentVoice = value;
     }
@@ -121,10 +153,15 @@ class setVoice extends btn {
         this.rightBar.addEventListener('click', this.clickBar.bind(this), true) //点击音量条修改音量
         var myDrag = new drag(this.handBar, this.rightBar, this.dragfn.bind(this)); //引进拖拽类，包装当前的音量条
         myDrag.init();
+        this._tips='设置静音';
     }
 
     hasOwnAttribute(str) {
         return ((this.__proto__).hasOwnProperty(str));
+    }
+
+    set _tips(str){
+        this.leftIcon.title=str;
     }
 }
 export default setVoice;
